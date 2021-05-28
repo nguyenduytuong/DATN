@@ -15,8 +15,6 @@ class LoginController extends Controller
         }
 
     }
-
-
     public function getdangnhapAdmin()
     {
         return view('admin.login');
