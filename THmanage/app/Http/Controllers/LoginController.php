@@ -35,17 +35,17 @@ class LoginController extends Controller
             ]);
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
         {
-            return redirect('admin.layouts.index');
+            return redirect('admin');
         }
         else
         {
-            return redirect('admin/dangnhap')->with('thongbao','Sai mật Email hoặc Mật Khẩu');
+            return redirect('login')->with('thongbao','Sai mật Email hoặc Mật Khẩu');
         }
     }
     public function getdangxuatAdmin()
     {
         Auth::login();
-        return redirect('admin/dangnhap');
+        return redirect('login');
     }
     public function getDangky()
     {
@@ -88,6 +88,6 @@ class LoginController extends Controller
         $user->faculty= $request->faculty;
         $user->type=0;
         $user->save();
-        return redirect('admin/dangnhap')->with('thongbao','Đăng kí thành công');
+        return redirect('login')->with('thongbao','Đăng kí thành công');
     }
 }

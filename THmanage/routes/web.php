@@ -2,39 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-//Route::get('/', function () {
-//    return view('user.index');
-//});
-//Route::get('/admin', function () {
-//    return view('admin.layouts.index');
-//});
-//Route::get('/admin/room', function () {
-//    return view('admin.listrooms');
-//});
 
-
-Route::get('/room', function () {
-    return view('user.listrooms');
+Route::group(['prefix' => 'admin/zone'], function () {
+	Route::GET('/','App\Http\Controllers\zoneController@index');
+	Route::POST('addzone','App\Http\Controllers\zoneController@addZone');
+	Route::GET('detailzone/{id}','App\Http\Controllers\zoneController@detailZone');
+	Route::GET('deletezone/{id}','App\Http\Controllers\zoneController@deleteZone');
+	Route::POST('editzone','App\Http\Controllers\zoneController@editZone');
 });
-Route::get('admin/dangnhap','App\Http\Controllers\LoginController@getdangnhapAdmin');
-Route::post('admin/dangnhap','App\Http\Controllers\LoginController@postdangnhapAdmin');
-Route::get('admin/logout','App\Http\Controllers\LoginController@getdangxuatAdmin');
+Route::get('login','App\Http\Controllers\LoginController@getdangnhapAdmin');
+Route::post('login','App\Http\Controllers\LoginController@postdangnhapAdmin');
+Route::get('logout','App\Http\Controllers\LoginController@getdangxuatAdmin');
+Route::get('register','App\Http\Controllers\LoginController@getDangky');
+Route::post('register','App\Http\Controllers\LoginController@postDangky');
 
-// Route::group(["prefix" => "admin", 'middleware' => 'login_check'], function () {
-
-//     Route::get('/', [AdminController::class, 'getListAdmin'])->name('getListAdmin');
-
-
+// Route::group(['prefix' => 'admin', 'middleware' => 'adminCheck'], function () {
+//     Route::get('/',function(){
+// 		return view('admin.index');
+// 	});
 // });
-Route::get('dangky','App\Http\Controllers\LoginController@getDangky');
-Route::post('dangky','App\Http\Controllers\LoginController@postDangky');
+
